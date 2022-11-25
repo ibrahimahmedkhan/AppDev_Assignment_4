@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'book.dart';
+import 'book_model.dart';
 
 abstract class BookRepository {
   Future<List<Book>> fetchBooksList();
@@ -23,10 +23,10 @@ class MockBookRepository implements BookRepository {
   @override
   Future<List<Book>> fetchBooksList() async {
     List<Book> books = [
-      Book(name: 'Akunamatata', author: 'Roald Dahle'),
-      Book(name: 'The first book', author: 'Ibrahim'),
-      Book(name: 'Only if you knew', author: 'Ahris'),
-      Book(name: 'Clockwork princess', author: 'Ashad Nadeem')
+      // Book(bookName: 'Akunamatata', author: 'Roald Dahle', ISBN: '1'),
+      // Book(bookName: 'The first book', author: 'Ibrahim', ISBN: '2'),
+      // Book(bookName: 'Only if you knew', author: 'Ahris', ISBN: '3'),
+      // Book(bookName: 'Clockwork princess', author: 'Ashad Nadeem', ISBN: '4')
     ];
     return books;
   }

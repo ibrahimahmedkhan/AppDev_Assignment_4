@@ -1,4 +1,4 @@
-import 'package:assignment_4/book/book.dart';
+import 'package:assignment_4/book/book_model.dart';
 import 'package:flutter/material.dart';
 
 class BookWidget extends StatelessWidget {
@@ -11,7 +11,7 @@ class BookWidget extends StatelessWidget {
     return ListView(
       children: books
           .map((book) => ListTile(
-                leading: Text(book.name),
+                leading: Text(book.bookName),
                 trailing: Text(book.author),
               ))
           .toList(),

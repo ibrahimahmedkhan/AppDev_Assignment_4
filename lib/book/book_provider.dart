@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class BookProvider with ChangeNotifier {
   List<Book> books = [];
 
-  final BookRepository _bookRepository = MockBookRepository();
+  final BookRepository _bookRepository = FirebaseBookRepository();
 
   fetchBooks() async {
     books = await _bookRepository.fetchBooksList();

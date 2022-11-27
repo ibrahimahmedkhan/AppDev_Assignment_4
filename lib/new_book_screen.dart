@@ -47,11 +47,7 @@ class _NewBookScreenState extends State<NewBookScreen> {
   }
 
   postData(Book book) {
-    db
-        .collection('books')
-        .doc(book.ISBN)
-        .set(book.toJson());
-
+    db.collection('books').doc(book.ISBN).set(book.toJson());
   }
 
   @override
@@ -67,7 +63,7 @@ class _NewBookScreenState extends State<NewBookScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
                     controller: bookNameController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         hintText: 'Harry Potter', labelText: 'Book name'),
                   ),
                 ),
@@ -75,7 +71,7 @@ class _NewBookScreenState extends State<NewBookScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
                     controller: authorController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         hintText: 'J.K Rowling', labelText: 'Author'),
                   ),
                 ),
@@ -83,7 +79,7 @@ class _NewBookScreenState extends State<NewBookScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
                     controller: publisherNameController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         hintText: 'publisher name', labelText: 'Publisher'),
                   ),
                 ),
@@ -91,7 +87,7 @@ class _NewBookScreenState extends State<NewBookScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
                     controller: urlController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         hintText: 'https://as', labelText: 'Image'),
                   ),
                 ),
@@ -99,19 +95,22 @@ class _NewBookScreenState extends State<NewBookScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
                     controller: ISBNController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         hintText: '12012901930', labelText: 'ISBN'),
                   ),
                 ),
                 TextButton(
-                    onPressed: () => postData(Book(
-                        bookName: bookNameController.value.text,
-                        author: authorController.value.text,
-                        publisherName: publisherNameController.value.text,
-                        url: urlController.value.text,
-                        ISBN: ISBNController.value.text,
-                        isFavorite: false)),
-                    child: Text('submit'))
+                    onPressed: () {
+                      postData(Book(
+                          bookName: bookNameController.value.text,
+                          author: authorController.value.text,
+                          publisherName: publisherNameController.value.text,
+                          url: urlController.value.text,
+                          ISBN: ISBNController.value.text,
+                          isFavorite: false));
+                      Navigator.pop(context);
+                    },
+                    child: const Text('submit'))
               ],
             ),
           ),

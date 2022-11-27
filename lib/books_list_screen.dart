@@ -1,6 +1,6 @@
-import 'package:assignment_4/book/book_details_screen.dart';
+import 'package:assignment_4/book/book_list_tile_widget.dart';
 import 'package:assignment_4/book/book_provider.dart';
-import 'package:assignment_4/book/book_widget.dart';
+import 'package:assignment_4/book_details_screen.dart';
 import 'package:assignment_4/counter/counter_provider.dart';
 import 'package:assignment_4/new_book_screen.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,6 @@ class BooksListScren extends StatefulWidget {
 class _BooksListScrenState extends State<BooksListScren> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     context.read<CounterProvider>().fetchCounters();
@@ -32,11 +31,16 @@ class _BooksListScrenState extends State<BooksListScren> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: BookWidget(
-            books: context.watch<BookProvider>().books,
-            onTap: (book) => Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => BookDetailsScreen(book: book)))),
-        // child: UserInformation(),
+        child: ListView(
+          children: context
+              .watch<BookProvider>()
+              .books
+              .map((book) => BookListTile(
+                  book: book,
+                  onTap: (book) => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => BookDetailsScreen(book: book)))))
+              .toList(),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -46,9 +50,7 @@ class _BooksListScrenState extends State<BooksListScren> {
           setState(() {
             context.read<BookProvider>().fetchBooks();
           });
-        }
-        // context.read<CounterProvider>().increment(),
-        ,
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),

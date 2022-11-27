@@ -1,6 +1,6 @@
 class Book {
   String bookName;
-  String author;
+  List<String> authors;
   String ISBN;
   String publisherName;
   String url;
@@ -9,7 +9,7 @@ class Book {
   Book(
       {required this.bookName,
       required this.publisherName,
-      required this.author,
+      required this.authors,
       required this.url,
       required this.isFavorite,
       this.ISBN = '0'});
@@ -18,7 +18,7 @@ class Book {
     return Book(
         bookName: json['bookName'] as String? ?? 'field empty',
         publisherName: json['publisherName'] as String? ?? 'field empty',
-        author: json['author'] as String? ?? 'field empty',
+        authors: json['author'] as List<String>? ?? [],
         url: json['url'] as String? ?? 'field empty',
         ISBN: json['ISBN'] as String? ?? 'field empty',
         isFavorite: json['isFavorite'] as bool? ?? false);
@@ -28,7 +28,7 @@ class Book {
     return {
       'bookName': bookName,
       'publisherName': publisherName,
-      'author': author,
+      'author': authors,
       'url': url,
       'ISBN': ISBN,
       'isFavorite': isFavorite

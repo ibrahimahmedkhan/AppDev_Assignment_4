@@ -1,4 +1,5 @@
 import 'package:assignment_4/book/book_model.dart';
+import 'package:assignment_4/multi_text_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,7 @@ class _NewBookScreenState extends State<NewBookScreen> {
   late TextEditingController publisherNameController;
   late TextEditingController urlController;
   late TextEditingController ISBNController;
+  late List<TextEditingController> authorControllers;
 
   final db = FirebaseFirestore.instance;
 
@@ -28,22 +30,7 @@ class _NewBookScreenState extends State<NewBookScreen> {
     publisherNameController = TextEditingController();
     urlController = TextEditingController();
     ISBNController = TextEditingController();
-
-    bookNameController.addListener(() {
-      setState(() {});
-    });
-    authorController.addListener(() {
-      setState(() {});
-    });
-    publisherNameController.addListener(() {
-      setState(() {});
-    });
-    urlController.addListener(() {
-      setState(() {});
-    });
-    ISBNController.addListener(() {
-      setState(() {});
-    });
+    authorControllers = List<TextEditingController>.empty(growable: true);
   }
 
   postData(Book book) {
@@ -75,6 +62,9 @@ class _NewBookScreenState extends State<NewBookScreen> {
                         hintText: 'J.K Rowling', labelText: 'Author'),
                   ),
                 ),
+                MultiTextField(
+                  textEditingControllers: authorControllers,
+                ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
@@ -101,9 +91,13 @@ class _NewBookScreenState extends State<NewBookScreen> {
                 ),
                 TextButton(
                     onPressed: () {
+                      print('do smthn');
                       postData(Book(
                           bookName: bookNameController.value.text,
-                          author: authorController.value.text,
+                          authors: authorControllers.map((authorController) {
+                            print(authorController.value.text);
+                            return authorController.value.text;
+                          }).toList(),
                           publisherName: publisherNameController.value.text,
                           url: urlController.value.text,
                           ISBN: ISBNController.value.text,

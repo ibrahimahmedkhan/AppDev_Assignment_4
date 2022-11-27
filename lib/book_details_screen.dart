@@ -16,7 +16,7 @@ class BookDetailsScreen extends StatelessWidget {
                     ? NetworkImage(book.url)
                     : null),
             Text(book.bookName),
-            Text(book.author),
+            Text(book.authors[0] as String? ?? 'a'),
             Text(book.publisherName),
             Text(book.ISBN),
             Icon(

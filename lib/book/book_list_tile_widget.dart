@@ -35,7 +35,7 @@ class _BookListTileState extends State<BookListTile> {
               ? NetworkImage(widget.book.url)
               : null),
       title: Text(widget.book.bookName),
-      subtitle: Text(widget.book.author),
+      subtitle: Text(widget.book.authors[0] as String? ?? 'aa'),
       trailing: IconButton(
         onPressed: () {
           context.read<BookProvider>().fetchBooks();

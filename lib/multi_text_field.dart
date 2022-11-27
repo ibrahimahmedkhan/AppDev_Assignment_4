@@ -9,29 +9,26 @@ class MultiTextField extends StatefulWidget {
 
 class _MultiTextFieldState extends State<MultiTextField>
     with SingleTickerProviderStateMixin {
-  List<Widget> _phoneWidgets = List<TextField>.empty(growable: true);
-  List<TextEditingController> _textEditingControllers =
+  final List<Widget> _phoneWidgets = List<TextField>.empty(growable: true);
+  final List<TextEditingController> _textEditingControllers =
       List<TextEditingController>.empty(growable: true);
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    _phoneWidgets.add(TextField());
+    _phoneWidgets.add(const TextField());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Column(
-          children: List.generate(
-              _phoneWidgets.length, (index) => _phoneWidgets[index]),
-        ),
+      body: Column(
+        children: List.generate(
+            _phoneWidgets.length, (index) => _phoneWidgets[index]),
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () => setState(() {
-                _phoneWidgets.add(TextField());
+                _phoneWidgets.add(const TextField());
                 _textEditingControllers.add(TextEditingController());
               })),
     );

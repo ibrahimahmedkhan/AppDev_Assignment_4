@@ -25,69 +25,36 @@ class _BooksListScrenState extends State<BooksListScren> {
     context.read<BookProvider>().fetchBooks();
   }
 
+  final Stream<QuerySnapshot> _usersStream =
+      FirebaseFirestore.instance.collection('books').snapshots();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: Center(
-        child: BookWidget(books: context.watch<BookProvider>().books),
+        child: BookWidget(
+            books: context.watch<BookProvider>().books,
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const NewBookScreen()))),
         // child: UserInformation(),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const NewBookScreen()))
+        onPressed: () async {
+          setState(() {});
+          await Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const NewBookScreen()));
+          setState(() {
+            context.read<BookProvider>().fetchBooks();
+          });
         }
         // context.read<CounterProvider>().increment(),
         ,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
-    );
-  }
-}
-
-//////////////////////////////////////////////////////////////
-class UserInformation extends StatefulWidget {
-  @override
-  _UserInformationState createState() => _UserInformationState();
-}
-
-class _UserInformationState extends State<UserInformation> {
-  final Stream<QuerySnapshot> _usersStream =
-      FirebaseFirestore.instance.collection('books').snapshots();
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: _usersStream,
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return const Text('Something went wrong');
-        }
-
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Text("Loading");
-        }
-
-        return ListView(
-          children: snapshot.data!.docs
-              .map((DocumentSnapshot document) {
-                Map<String, dynamic> data =
-                    document.data()! as Map<String, dynamic>;
-                return ListTile(
-                  title: Text(data['name']),
-                  subtitle: Text(data['author']),
-                );
-              })
-              .toList()
-              .cast(),
-        );
-      },
     );
   }
 }

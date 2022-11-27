@@ -12,7 +12,7 @@ class FirebaseBookRepository implements BookRepository {
     final db = FirebaseFirestore.instance;
     List<Book> books = [];
     await db.collection("books").get().then((event) {
-      books = event.docs.map((e) => Book.fromJson(e.data(), e.id)).toList();
+      books = event.docs.map((book) => Book.fromJson(book.data())).toList();
       return books;
     });
     return books;

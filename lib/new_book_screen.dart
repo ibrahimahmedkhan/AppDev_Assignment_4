@@ -47,57 +47,73 @@ class _NewBookScreenState extends State<NewBookScreen> {
   }
 
   postData(Book book) {
-    db.collection('books').add(book.toJson()).then((value) => print(value));
+    db
+        .collection('books')
+        .doc(book.ISBN)
+        .set(book.toJson());
+
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 50),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: bookNameController,
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 50),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: bookNameController,
+                    decoration: InputDecoration(
+                        hintText: 'Harry Potter', labelText: 'Book name'),
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: authorController,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: authorController,
+                    decoration: InputDecoration(
+                        hintText: 'J.K Rowling', labelText: 'Author'),
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: publisherNameController,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: publisherNameController,
+                    decoration: InputDecoration(
+                        hintText: 'publisher name', labelText: 'Publisher'),
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: urlController,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: urlController,
+                    decoration: InputDecoration(
+                        hintText: 'https://as', labelText: 'Image'),
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: ISBNController,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: ISBNController,
+                    decoration: InputDecoration(
+                        hintText: '12012901930', labelText: 'ISBN'),
+                  ),
                 ),
-              ),
-              TextButton(
-                  onPressed: () => postData(Book(
+                TextButton(
+                    onPressed: () => postData(Book(
                         bookName: bookNameController.value.text,
                         author: authorController.value.text,
                         publisherName: publisherNameController.value.text,
                         url: urlController.value.text,
                         ISBN: ISBNController.value.text,
-                      )),
-                  child: Text('submit'))
-            ],
+                        isFavorite: false)),
+                    child: Text('submit'))
+              ],
+            ),
           ),
         ),
       ),

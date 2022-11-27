@@ -18,7 +18,7 @@ class Book {
     return Book(
         bookName: json['bookName'] as String? ?? 'field empty',
         publisherName: json['publisherName'] as String? ?? 'field empty',
-        authors: json['author'] as List<String>? ?? [],
+        authors: List<String>.from(json['authors'] ?? []),
         url: json['url'] as String? ?? 'field empty',
         ISBN: json['ISBN'] as String? ?? 'field empty',
         isFavorite: json['isFavorite'] as bool? ?? false);
@@ -28,7 +28,7 @@ class Book {
     return {
       'bookName': bookName,
       'publisherName': publisherName,
-      'author': authors,
+      'authors': authors,
       'url': url,
       'ISBN': ISBN,
       'isFavorite': isFavorite

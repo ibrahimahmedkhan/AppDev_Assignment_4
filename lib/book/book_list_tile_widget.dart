@@ -31,11 +31,12 @@ class _BookListTileState extends State<BookListTile> {
     return ListTile(
       onTap: () => widget.onTap(widget.book),
       leading: CircleAvatar(
-          backgroundImage: widget.book.url.toString().substring(0, 4) == 'http'
+          backgroundImage: widget.book.url.toString().contains('http')
               ? NetworkImage(widget.book.url)
               : null),
       title: Text(widget.book.bookName),
-      subtitle: Text(widget.book.authors[0] as String? ?? 'aa'),
+      subtitle:
+          Text(widget.book.authors.isNotEmpty ? widget.book.authors[0] : ''),
       trailing: IconButton(
         onPressed: () {
           context.read<BookProvider>().fetchBooks();

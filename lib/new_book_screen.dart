@@ -91,11 +91,9 @@ class _NewBookScreenState extends State<NewBookScreen> {
                 ),
                 TextButton(
                     onPressed: () {
-                      print('do smthn');
                       postData(Book(
                           bookName: bookNameController.value.text,
                           authors: authorControllers.map((authorController) {
-                            print(authorController.value.text);
                             return authorController.value.text;
                           }).toList(),
                           publisherName: publisherNameController.value.text,
@@ -104,7 +102,7 @@ class _NewBookScreenState extends State<NewBookScreen> {
                           isFavorite: false));
                       Navigator.pop(context);
                     },
-                    child: const Text('submit'))
+                    child: const Text('Submit'))
               ],
             ),
           ),

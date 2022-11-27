@@ -6,16 +6,16 @@ import 'package:assignment_4/new_book_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class BooksListScren extends StatefulWidget {
-  const BooksListScren({Key? key, required this.title}) : super(key: key);
+class BooksListScreen extends StatefulWidget {
+  const BooksListScreen({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State<BooksListScren> createState() => _BooksListScrenState();
+  State<BooksListScreen> createState() => _BooksListScreenState();
 }
 
-class _BooksListScrenState extends State<BooksListScren> {
+class _BooksListScreenState extends State<BooksListScreen> {
   @override
   void initState() {
     super.initState();

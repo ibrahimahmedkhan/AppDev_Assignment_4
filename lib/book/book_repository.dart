@@ -18,16 +18,3 @@ class FirebaseBookRepository implements BookRepository {
     return books;
   }
 }
-
-class MockBookRepository implements BookRepository {
-  @override
-  Future<List<Book>> fetchBooksList() async {
-    List<Book> books = [
-      // Book(bookName: 'Akunamatata', author: 'Roald Dahle', ISBN: '1'),
-      // Book(bookName: 'The first book', author: 'Ibrahim', ISBN: '2'),
-      // Book(bookName: 'Only if you knew', author: 'Ahris', ISBN: '3'),
-      // Book(bookName: 'Clockwork princess', author: 'Ashad Nadeem', ISBN: '4')
-    ];
-    return books;
-  }
-}

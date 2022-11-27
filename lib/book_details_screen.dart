@@ -12,11 +12,11 @@ class BookDetailsScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             CircleAvatar(
-                backgroundImage: book.url.toString().substring(0, 4) == 'http'
+                backgroundImage: book.url.toString().contains('http')
                     ? NetworkImage(book.url)
                     : null),
             Text(book.bookName),
-            Text(book.authors[0] as String? ?? 'a'),
+            // Text(book.authors[0] as String? ?? 'a'),
             Text(book.publisherName),
             Text(book.ISBN),
             Icon(

@@ -8,22 +8,42 @@ class BookDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            CircleAvatar(
-                backgroundImage: book.url.toString().contains('http')
-                    ? NetworkImage(book.url)
-                    : null),
-            Text(book.bookName),
-            // Text(book.authors[0] as String? ?? 'a'),
-            Text(book.publisherName),
-            Text(book.ISBN),
-            Icon(
-              Icons.favorite,
-              color: book.isFavorite ? Colors.red : Colors.grey,
-            )
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(40.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CircleAvatar(
+                  backgroundImage: book.url.toString().contains('http')
+                      ? NetworkImage(book.url)
+                      : null),
+              ListTile(
+                  title: Text('Book Name'),
+                  subtitle: Text(
+                    book.bookName,
+                  )),
+              Column(
+                children: book.authors.isNotEmpty
+                    ? book.authors.map((author) => Text(author)).toList()
+                    : [Text('')],
+              ),
+              ListTile(
+                  title: Text('Publisher Name'),
+                  subtitle: Text(
+                    book.publisherName,
+                  )),
+              ListTile(
+                  title: Text('ISBN'),
+                  subtitle: Text(
+                    book.ISBN,
+                  )),
+              Icon(
+                Icons.favorite,
+                color: book.isFavorite ? Colors.red : Colors.grey,
+              )
+            ],
+          ),
         ),
       ),
     );

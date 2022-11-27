@@ -48,7 +48,7 @@ class _NewBookScreenState extends State<NewBookScreen> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: TextField(
+                  child: TextFormField(
                     controller: bookNameController,
                     decoration: const InputDecoration(
                         hintText: 'Harry Potter', labelText: 'Book name'),
@@ -56,7 +56,7 @@ class _NewBookScreenState extends State<NewBookScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: TextField(
+                  child: TextFormField(
                     controller: authorController,
                     decoration: const InputDecoration(
                         hintText: 'J.K Rowling', labelText: 'Author'),
@@ -67,7 +67,7 @@ class _NewBookScreenState extends State<NewBookScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: TextField(
+                  child: TextFormField(
                     controller: publisherNameController,
                     decoration: const InputDecoration(
                         hintText: 'publisher name', labelText: 'Publisher'),
@@ -75,7 +75,7 @@ class _NewBookScreenState extends State<NewBookScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: TextField(
+                  child: TextFormField(
                     controller: urlController,
                     decoration: const InputDecoration(
                         hintText: 'https://as', labelText: 'Image'),
@@ -83,7 +83,7 @@ class _NewBookScreenState extends State<NewBookScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: TextField(
+                  child: TextFormField(
                     controller: ISBNController,
                     decoration: const InputDecoration(
                         hintText: '12012901930', labelText: 'ISBN'),
@@ -91,16 +91,23 @@ class _NewBookScreenState extends State<NewBookScreen> {
                 ),
                 TextButton(
                     onPressed: () {
-                      postData(Book(
-                          bookName: bookNameController.value.text,
-                          authors: authorControllers.map((authorController) {
-                            return authorController.value.text;
-                          }).toList(),
-                          publisherName: publisherNameController.value.text,
-                          url: urlController.value.text,
-                          ISBN: ISBNController.value.text,
-                          isFavorite: false));
-                      Navigator.pop(context);
+                      if (ISBNController.value.text != '') {
+                        postData(Book(
+                            bookName: bookNameController.value.text,
+                            authors: authorControllers.map((authorController) {
+                              return authorController.value.text;
+                            }).toList(),
+                            publisherName: publisherNameController.value.text,
+                            url: urlController.value.text,
+                            ISBN: ISBNController.value.text,
+                            isFavorite: false));
+                        Navigator.pop(context);
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content: Text('ISBN field cannot be empty')),
+                        );
+                      }
                     },
                     child: const Text('Submit'))
               ],

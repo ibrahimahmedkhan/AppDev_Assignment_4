@@ -9,7 +9,7 @@ class BookWidget extends StatefulWidget {
       : super(key: key);
 
   final List<Book> books;
-  final VoidCallback onTap;
+  final void Function(Book book) onTap;
   @override
   State<BookWidget> createState() => _BookWidgetState();
 }
@@ -29,7 +29,7 @@ class _BookWidgetState extends State<BookWidget> {
     return ListView(
       children: widget.books
           .map((book) => ListTile(
-                onTap: widget.onTap,
+                onTap: () => widget.onTap(book),
                 leading: CircleAvatar(
                     backgroundImage:
                         book.url.toString().substring(0, 4) == 'http'

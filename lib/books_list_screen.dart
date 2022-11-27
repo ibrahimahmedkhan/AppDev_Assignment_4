@@ -1,8 +1,8 @@
+import 'package:assignment_4/book/book_details_screen.dart';
 import 'package:assignment_4/book/book_provider.dart';
 import 'package:assignment_4/book/book_widget.dart';
 import 'package:assignment_4/counter/counter_provider.dart';
 import 'package:assignment_4/new_book_screen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,9 +25,6 @@ class _BooksListScrenState extends State<BooksListScren> {
     context.read<BookProvider>().fetchBooks();
   }
 
-  final Stream<QuerySnapshot> _usersStream =
-      FirebaseFirestore.instance.collection('books').snapshots();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,8 +34,8 @@ class _BooksListScrenState extends State<BooksListScren> {
       body: Center(
         child: BookWidget(
             books: context.watch<BookProvider>().books,
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const NewBookScreen()))),
+            onTap: (book) => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => BookDetailsScreen(book: book)))),
         // child: UserInformation(),
       ),
       floatingActionButton: FloatingActionButton(
